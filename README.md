@@ -6,6 +6,10 @@
 ## demo
 - https://ahmed22-portfolio.netlify.app/
 
+## view
+![1](https://user-images.githubusercontent.com/89364017/189989454-9e6e5691-865a-439b-937d-2bf176ed1eea.png)
+![2](https://user-images.githubusercontent.com/89364017/189989491-6ebaaf4d-57de-47c6-965f-8ccd70f2c24d.png)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
