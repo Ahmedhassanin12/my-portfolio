@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# MY PORTFOLIO
+- I create my portfolio using react freamwork
+- I use Sass for styling my porflio
+- I use farmer motion to Animations that work like magic.
+
+## demo
+- https://ahmed22-portfolio.netlify.app/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
