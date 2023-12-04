@@ -42,7 +42,7 @@ const Header = () => {
         transition={{ duration: 0.5, delayChildren: 0.5 }}
         className="app__header-img"
       >
-        <img src={images.profile} alt="profile-bg" />
+        <img src={"https://scontent.fcai21-4.fna.fbcdn.net/v/t39.30808-6/406032152_24367709166177900_5401029176140992761_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=efb6e6&_nc_ohc=6An0e3DQM1EAX9Ty3L7&_nc_ht=scontent.fcai21-4.fna&oh=00_AfA7WQZylSTtaFEt5F35IbHFMvkFlUMek_55gbDp-Wy3HA&oe=6572D6D3"} alt="profile-bg" />
         <motion.img
           whileInView={{ scale: [0, 1] }}
           transition={{ duration: 1, ease: "easeInOut" }}
