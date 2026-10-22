@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="quran-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07121b" />
+      <stop offset="50%" stop-color="#0b1b28" />
+      <stop offset="100%" stop-color="#061017" />
+    </linearGradient>
+
+    <radialGradient id="quran-glow" cx="40%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="quran-accent-glow" cx="80%" cy="80%" r="50%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.18" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+    </radialGradient>
+
+    <filter id="quran-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000000" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#quran-bg)" rx="16" />
+  <rect width="800" height="500" fill="url(#quran-glow)" rx="16" />
+  <rect width="800" height="500" fill="url(#quran-accent-glow)" rx="16" />
+
+  <!-- App Window Container -->
+  <rect x="30" y="24" width="740" height="452" rx="12" fill="#091824" stroke="#16384c" stroke-width="1.5" filter="url(#quran-shadow)" />
+
+  <!-- Window Header -->
+  <g id="header">
+    <rect x="30" y="24" width="740" height="48" rx="12" fill="#0c2030" stroke="#16384c" stroke-width="1.5" />
+    <circle cx="56" cy="48" r="6" fill="#ef4444" />
+    <circle cx="76" cy="48" r="6" fill="#f59e0b" />
+    <circle cx="96" cy="48" r="6" fill="#10b981" />
+
+    <text x="124" y="53" fill="#bae6fd" font-family="system-ui, sans-serif" font-size="13" font-weight="700">
+      Quran Audio Player <tspan fill="#38bdf8">• React.js + Redux Toolkit</tspan>
+    </text>
+
+    <!-- Tailwind badge -->
+    <g transform="translate(620, 36)">
+      <rect width="130" height="24" rx="12" fill="#0c4a6e" stroke="#38bdf8" stroke-width="1" />
+      <text x="65" y="16" fill="#e0f2fe" font-family="system-ui, sans-serif" font-size="11" font-weight="700" text-anchor="middle">
+        Tailwind CSS UI
+      </text>
+    </g>
+  </g>
+
+  <!-- Left: Surah Playlist -->
+  <g id="surah-list" transform="translate(50, 92)">
+    <rect width="250" height="364" rx="10" fill="#071520" stroke="#16384c" stroke-width="1" />
+    <text x="16" y="26" fill="#7dd3fc" font-family="system-ui, sans-serif" font-size="12" font-weight="700">RECITERS &amp; SURAHS</text>
+
+    <!-- Surah Item 1 (Active) -->
+    <g transform="translate(10, 42)">
+      <rect width="230" height="54" rx="8" fill="#0369a1" fill-opacity="0.25" stroke="#38bdf8" stroke-width="1.2" />
+      <rect x="10" y="10" width="34" height="34" rx="6" fill="#0284c7" />
+      <text x="27" y="32" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle">01</text>
+      <text x="54" y="24" fill="#ffffff" font-family="system-ui, sans-serif" font-size="12" font-weight="700">Al-Fatihah</text>
+      <text x="54" y="39" fill="#bae6fd" font-family="system-ui, sans-serif" font-size="10">Mishary Rashid • 7 Ayahs</text>
+      <circle cx="212" cy="27" r="5" fill="#38bdf8" />
+    </g>
+
+    <!-- Surah Item 2 -->
+    <g transform="translate(10, 104)">
+      <rect width="230" height="54" rx="8" fill="#0a1d2c" stroke="#16384c" stroke-width="0.8" />
+      <rect x="10" y="10" width="34" height="34" rx="6" fill="#0c2538" />
+      <text x="27" y="32" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle">02</text>
+      <text x="54" y="24" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Al-Baqarah</text>
+      <text x="54" y="39" fill="#64748b" font-family="system-ui, sans-serif" font-size="10">Mishary Rashid • 286 Ayahs</text>
+    </g>
+
+    <!-- Surah Item 3 -->
+    <g transform="translate(10, 166)">
+      <rect width="230" height="54" rx="8" fill="#0a1d2c" stroke="#16384c" stroke-width="0.8" />
+      <rect x="10" y="10" width="34" height="34" rx="6" fill="#0c2538" />
+      <text x="27" y="32" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle">03</text>
+      <text x="54" y="24" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Ali 'Imran</text>
+      <text x="54" y="39" fill="#64748b" font-family="system-ui, sans-serif" font-size="10">Mishary Rashid • 200 Ayahs</text>
+    </g>
+
+    <!-- Surah Item 4 -->
+    <g transform="translate(10, 228)">
+      <rect width="230" height="54" rx="8" fill="#0a1d2c" stroke="#16384c" stroke-width="0.8" />
+      <rect x="10" y="10" width="34" height="34" rx="6" fill="#0c2538" />
+      <text x="27" y="32" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle">18</text>
+      <text x="54" y="24" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Al-Kahf</text>
+      <text x="54" y="39" fill="#64748b" font-family="system-ui, sans-serif" font-size="10">Mishary Rashid • 110 Ayahs</text>
+    </g>
+
+    <!-- Surah Item 5 -->
+    <g transform="translate(10, 290)">
+      <rect width="230" height="54" rx="8" fill="#0a1d2c" stroke="#16384c" stroke-width="0.8" />
+      <rect x="10" y="10" width="34" height="34" rx="6" fill="#0c2538" />
+      <text x="27" y="32" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="13" font-weight="700" text-anchor="middle">36</text>
+      <text x="54" y="24" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="12" font-weight="600">Ya-Sin</text>
+      <text x="54" y="39" fill="#64748b" font-family="system-ui, sans-serif" font-size="10">Mishary Rashid • 83 Ayahs</text>
+    </g>
+  </g>
+
+  <!-- Right: Main Player & Waveform Visualizer -->
+  <g id="main-player" transform="translate(320, 92)">
+    <rect width="430" height="364" rx="10" fill="#081826" stroke="#16384c" stroke-width="1" />
+
+    <!-- Now Playing Badge -->
+    <g transform="translate(20, 20)">
+      <rect width="90" height="20" rx="4" fill="#0369a1" />
+      <text x="45" y="14" fill="#e0f2fe" font-family="system-ui, sans-serif" font-size="10" font-weight="700" text-anchor="middle">NOW PLAYING</text>
+    </g>
+
+    <!-- Surah Title & Arabic Calligraphy Banner -->
+    <g transform="translate(20, 52)">
+      <rect width="390" height="110" rx="8" fill="#042033" stroke="#0284c7" stroke-width="1.2" />
+      <circle cx="55" cy="55" r="34" fill="#0369a1" fill-opacity="0.3" stroke="#38bdf8" stroke-width="1.5" />
+      <text x="55" y="62" fill="#38bdf8" font-family="sans-serif" font-size="20" font-weight="700" text-anchor="middle">الفاتحة</text>
+
+      <text x="106" y="44" fill="#ffffff" font-family="system-ui, sans-serif" font-size="16" font-weight="700">Surah Al-Fatihah</text>
+      <text x="106" y="64" fill="#7dd3fc" font-family="system-ui, sans-serif" font-size="12">Reciter: Sheikh Mishary Rashid Alafasy</text>
+      <text x="106" y="82" fill="#10b981" font-family="'Fira Code', monospace" font-size="11">Redux State: Playing • 44.1kHz Hi-Fi</text>
+    </g>
+
+    <!-- Audio Waveform Visualization -->
+    <g id="waveform" transform="translate(20, 184)">
+      <rect width="390" height="60" rx="6" fill="#051522" stroke="#16384c" stroke-width="0.8" />
+      
+      <!-- Simulated waveform bars -->
+      <path d="M 15 30 L 15 30 M 25 24 L 25 36 M 35 18 L 35 42 M 45 12 L 45 48 M 55 16 L 55 44 M 65 22 L 65 38 M 75 10 L 75 50 M 85 14 L 85 46 M 95 20 L 95 40 M 105 8 L 105 52 M 115 15 L 115 45 M 125 22 L 125 38 M 135 12 L 135 48 M 145 18 L 145 42 M 155 24 L 155 36 M 165 14 L 165 46 M 175 10 L 175 50 M 185 20 L 185 40 M 195 15 L 195 45 M 205 25 L 205 35 M 215 12 L 215 48 M 225 18 L 225 42 M 235 22 L 235 38 M 245 16 L 245 44 M 255 10 L 255 50 M 265 14 L 265 46 M 275 20 L 275 40 M 285 25 L 285 35 M 295 12 L 295 48 M 305 18 L 305 42 M 315 24 L 315 36 M 325 15 L 325 45 M 335 20 L 335 40 M 345 26 L 345 34 M 355 14 L 355 46 M 365 22 L 365 38 M 375 28 L 375 32" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round" />
+
+      <!-- Progress scrubber overlay -->
+      <line x1="160" y1="4" x2="160" y2="56" stroke="#ffffff" stroke-width="2" />
+      <circle cx="160" cy="30" r="5" fill="#ffffff" />
+    </g>
+
+    <!-- Progress Timer -->
+    <text x="20" y="260" fill="#94a3b8" font-family="'Fira Code', monospace" font-size="11">01:14</text>
+    <text x="410" y="260" fill="#94a3b8" font-family="'Fira Code', monospace" font-size="11" text-anchor="end">02:45</text>
+
+    <!-- Audio Player Controls -->
+    <g id="controls" transform="translate(140, 280)">
+      <!-- Previous -->
+      <circle cx="30" cy="24" r="16" fill="#0c2538" stroke="#16384c" stroke-width="1" />
+      <path d="M 34 18 L 26 24 L 34 30 Z M 24 18 L 24 30" fill="#7dd3fc" stroke="#7dd3fc" stroke-width="1" />
+
+      <!-- Play / Pause Main Button -->
+      <circle cx="75" cy="24" r="24" fill="#0284c7" filter="url(#quran-shadow)" />
+      <path d="M 70 16 L 70 32 M 80 16 L 80 32" stroke="#ffffff" stroke-width="3" stroke-linecap="round" />
+
+      <!-- Next -->
+      <circle cx="120" cy="24" r="16" fill="#0c2538" stroke="#16384c" stroke-width="1" />
+      <path d="M 116 18 L 124 24 L 116 30 Z M 126 18 L 126 30" fill="#7dd3fc" stroke="#7dd3fc" stroke-width="1" />
+    </g>
+
+    <!-- Bottom Redux / Asynchronous Fetching Note -->
+    <g transform="translate(20, 328)">
+      <rect width="390" height="22" rx="4" fill="#051c2c" stroke="#16384c" stroke-width="0.8" />
+      <text x="195" y="15" fill="#38bdf8" font-family="system-ui, sans-serif" font-size="10" font-weight="600" text-anchor="middle">
+        Redux Toolkit Async Thunk • Automatic Caching • Zero Delay Next Track
+      </text>
+    </g>
+  </g>
+</svg>

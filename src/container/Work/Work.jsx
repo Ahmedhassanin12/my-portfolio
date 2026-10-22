@@ -1,120 +1,167 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { AiFillEye, AiFillGithub } from "react-icons/ai";
-import { motion } from "framer-motion";
-
-import { AppWrap, MotionWrap } from "../../wrapper";
-import { urlFor, client } from "../../client";
+import { HiOutlineCode, HiOutlineExternalLink } from "react-icons/hi";
+import { Reveal, Section } from "../../components";
+import { projectsData } from "../../data/portfolioData";
 
 import "./work.scss";
+
 const Work = () => {
   const [activeFilter, setActiveFilter] = useState("All");
-  const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
-  const [works, setWorks] = useState([]);
-  const [filterWorks, setFilterWorks] = useState([]);
 
-  useEffect(() => {
-    const query = '*[_type == "works"]';
-    client.fetch(query).then((data) => {
-      setWorks(data);
-      setFilterWorks(data);
-
-      
+  const categories = useMemo(() => {
+    const tags = new Set(["All"]);
+    projectsData.forEach((w) => {
+      (w.tags || []).forEach((t) => {
+        const clean = t?.trim();
+        if (clean && clean.toLowerCase() !== "all") tags.add(clean);
+      });
     });
-    return () => {};
+    return Array.from(tags);
   }, []);
 
-  const handelWorkFilter = (item) => {
-    setActiveFilter(item);
-    setAnimateCard([{y:100, opacity:0}])
-
-    setTimeout(()=>{
-      setAnimateCard([{y:0, opacity: 1}])
-
-      if (item === "All") {
-        setFilterWorks(works)
-      } else {
-        setFilterWorks(works.filter((work)=> work.tags.includes(item)))
-      }
-    },500)
-  };
+  const filteredWorks = useMemo(() => {
+    if (activeFilter === "All") return projectsData;
+    return projectsData.filter((w) =>
+      (w.tags || []).some((t) => t?.trim() === activeFilter)
+    );
+  }, [activeFilter]);
 
   return (
-    <>
-      <h2 className="head-text">
-        My Creative
-        <span> Portfolio </span>
-        Section
-      </h2>
-      <div className="app__work-filter">
-        {["UI/UX", "Web App", "React js", "Mobile App", "All"].map(
-          (item, index) => (
-            <div
-              key={index}
-              onClick={() => handelWorkFilter(item)}
-              className={`app__work-filter-item app__flex p-text ${
-                activeFilter === item ? "item-active" : ""
-              }`}
-            >
-              {item}
-            </div>
-          )
-        )}
-      </div>
-      <motion.div
-        animate={animateCard}
-        transition={{ duration: 0.5, delayChildren: 0.5 }}
-        className="app__work-portfolio"
-      >
-        {filterWorks.map((work, index) => (
-          <div className="app__work-item app__flex" key={index}>
-            <div className="app__work-img app__flex">
-              <img src={urlFor(work.imgUrl)} alt={work.name} />
-              <motion.div
-                whileHover={{ opacity: [0, 1] }}
-                transition={{
-                  duration: 0.25,
-                  ease: "easeInOut",
-                  staggerChildren: 0.5,
-                }}
-                className="app__work-hover app__flex"
-              >
-                <a href={work.projectLink} target="_blank" rel="noreferrer">
-                  <motion.div
-                    whileInView={{ scale: [0, 1] }}
-                    whileHover={{ scale: [1, 0.9] }}
-                    transition={{ duration: 0.25 }}
-                    className=" app__flex"
-                  >
-                    <AiFillEye />
-                  </motion.div>
-                </a>
-                <a href={work.codeLink} target="_blank" rel="noreferrer">
-                  <motion.div
-                    whileInView={{ scale: [0, 1] }}
-                    whileHover={{ scale: [1, 0.9] }}
-                    transition={{ duration: 0.25 }}
-                    className=" app__flex"
-                  >
-                    <AiFillGithub />
-                  </motion.div>
-                </a>
-              </motion.div>
-            </div>
-            <div className="app__work-content app__flex">
-              <h4 className="bold-text">{work.title}</h4>
-              <p className="p-text" style={{ marginTop: 10 }}>
-                {work.description}
-              </p>
-
-              <div className="app__work-tag app__flex">
-                <p className="p-text">{work.tags[0]}</p>
-              </div>
-            </div>
-          </div>
+    <Section
+      id="work"
+      index="02"
+      eyebrow="Selected Projects"
+      title={
+        <>
+          Crafted with <em>purpose</em> & code.
+        </>
+      }
+      intro="A collection of web applications, client interfaces, and frontend engineering experiments."
+    >
+      {/* Category Filter Tabs */}
+      <div className="work__filters" role="tablist" aria-label="Filter projects by category">
+        {categories.map((category) => (
+          <button
+            key={category}
+            type="button"
+            role="tab"
+            aria-selected={activeFilter === category}
+            className={`work__filter-btn ${activeFilter === category ? "is-active" : ""}`}
+            onClick={() => setActiveFilter(category)}
+          >
+            {category}
+          </button>
         ))}
-      </motion.div>
-    </>
+      </div>
+
+      <div className="work__grid">
+        {filteredWorks.map((work, index) => {
+          const tags = (work.tags || []).filter((t) => t && t.trim() !== "" && t !== "All");
+
+          return (
+            <Reveal
+              as="article"
+              key={work.id || work.title}
+              className="work__card"
+              delay={index * 80}
+            >
+              <div className="work__media">
+                {work.isArchitecturePreview || !work.image ? (
+                  <div className="work__placeholder" aria-label="Architecture Preview">
+                    <div className="work__placeholder-code">
+                      <span className="work__placeholder-dot" />
+                      <span className="work__placeholder-dot" />
+                      <span className="work__placeholder-dot" />
+                    </div>
+                    <div className="work__placeholder-inner">
+                      <HiOutlineCode className="work__placeholder-icon" aria-hidden="true" />
+                      <p className="work__placeholder-title">{work.title}</p>
+                      <span className="work__placeholder-badge mono-label">
+                        Architecture Preview
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <img
+                    src={work.image}
+                    alt={`Screenshot of ${work.title}`}
+                    loading={index < 2 ? "eager" : "lazy"}
+                    decoding="async"
+                    className="work__img"
+                  />
+                )}
+
+                {/* Quick-action overlay for desktop hover */}
+                <div className="work__overlay" aria-hidden="true">
+                  {work.projectLink && (
+                    <a
+                      href={work.projectLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="work__overlay-btn"
+                      tabIndex={-1}
+                    >
+                      <AiFillEye />
+                    </a>
+                  )}
+                  {work.codeLink && (
+                    <a
+                      href={work.codeLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="work__overlay-btn"
+                      tabIndex={-1}
+                    >
+                      <AiFillGithub />
+                    </a>
+                  )}
+                </div>
+              </div>
+
+              <div className="work__content">
+                <div className="work__tags">
+                  {tags.map((tag) => (
+                    <span key={tag} className="chip">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <h3 className="work__title">{work.title}</h3>
+                <p className="work__desc">{work.description}</p>
+
+                <div className="work__actions">
+                  {work.projectLink && (
+                    <a
+                      href={work.projectLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn--primary work__action-btn"
+                    >
+                      <span>Live Demo</span>
+                      <HiOutlineExternalLink aria-hidden="true" />
+                    </a>
+                  )}
+                  {work.codeLink && (
+                    <a
+                      href={work.codeLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn--ghost work__action-btn"
+                    >
+                      <AiFillGithub aria-hidden="true" />
+                      <span>Source</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </Reveal>
+          );
+        })}
+      </div>
+    </Section>
   );
 };
 
-export default AppWrap(MotionWrap(Work, "app__works"), "work", "app__primarybg");
+export default Work;

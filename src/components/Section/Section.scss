@@ -1,0 +1,50 @@
+@use "../../styles/breakpoints" as *;
+
+.section {
+  position: relative;
+  padding-block: var(--space-section);
+  border-top: 1px solid var(--color-border);
+}
+
+.section__header {
+  max-width: 48rem;
+  margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+}
+
+.section__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  color: var(--color-accent);
+
+  &::after {
+    content: "";
+    width: 3rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+}
+
+.section__index {
+  color: var(--color-text-muted);
+}
+
+.section__title {
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.035em;
+
+  em {
+    font-style: normal;
+    color: var(--color-accent);
+  }
+}
+
+.section__intro {
+  margin-top: var(--space-5);
+  max-width: 38rem;
+  font-size: var(--text-md);
+  color: var(--color-text-secondary);
+}

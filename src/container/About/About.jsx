@@ -1,49 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { images } from "../../constants";
-import { AppWrap, MotionWrap } from "../../wrapper";
-
-import { urlFor, client } from "../../client";
+import React from "react";
+import { Reveal, Section } from "../../components";
+import { aboutData } from "../../data/portfolioData";
 
 import "./about.scss";
 
 const About = () => {
-  const [abouts, setAbout] = useState([]);
-
-  useEffect(() => {
-    const query = '*[_type == "abouts"]';
-    client.fetch(query).then((data) => setAbout(data));
-  }, []);
   return (
-    <>
-      <h2 className="head-text">
-        I Know that
-        <span> Good Development</span>
-        <br />
-        means
-        <span> Good Business</span>
-      </h2>
-      <div className="app__profiles">
-        {abouts.map((about, index) => (
-          <motion.div
-            whileInView={{ opacity: 1 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.5, type: "tween" }}
-            className="app__profile-item"
-            key={`${about}+${index}`}
+    <Section
+      id="about"
+      index="01"
+      eyebrow="About Me"
+      title={
+        <>
+          Good development means <em>good business</em>.
+        </>
+      }
+      intro="I specialize in creating clean, responsive, and performance-focused digital experiences with modern web technologies."
+    >
+      <div className="about__grid">
+        {aboutData.map((about, index) => (
+          <Reveal
+            as="article"
+            key={about.id || about.title}
+            className="about__card"
+            delay={index * 100}
           >
-            <img src={urlFor(about.imgUrl)} alt={about.title} />
-            <h2 className="bold-text" style={{ marginTop: 20 }}>
-              {about.title}
-            </h2>
-            <p className="p-text" style={{ marginTop: 10 }}>
-              {about.description}
-            </p>
-          </motion.div>
+            <div className="about__media">
+              <img
+                src={about.image}
+                alt={about.title}
+                width="1200"
+                height="900"
+                loading="lazy"
+                decoding="async"
+                className="about__img"
+              />
+            </div>
+            <div className="about__body">
+              <h3 className="about__card-title">{about.title}</h3>
+              <p className="about__card-desc">{about.description}</p>
+            </div>
+          </Reveal>
         ))}
       </div>
-    </>
+    </Section>
   );
 };
 
-export default AppWrap(MotionWrap(About, "app__about"), "about", "app__whitebg");
+export default About;

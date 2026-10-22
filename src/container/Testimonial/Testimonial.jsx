@@ -1,73 +1,100 @@
-import React, {useState, useEffect} from 'react'
-import { motion } from "framer-motion";
-import {HiChevronLeft, HiChevronRight} from 'react-icons/hi'
-import { urlFor, client } from "../../client";
-import { AppWrap, MotionWrap } from "../../wrapper";
+import React, { useState } from "react";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import { Section } from "../../components";
 
-import './Testimonial.scss'
-const Testimonial = () => {
-  
-  const [brands, setBrands] = useState([]);
-  const [testimonials, setTestimonial] = useState([]);
+import "./Testimonial.scss";
+
+const Testimonial = ({ testimonials = [], brands = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   const handleClick = (index) => {
     setCurrentIndex(index);
   };
 
-  useEffect(() => {
-    const query = '*[_type == "brands"]';
-    const skillsQuery = '*[_type == "testimonials"]';
-    client.fetch(query).then((data) => {
-      setBrands(data);
-    });
-    client.fetch(skillsQuery).then((data) => {
-      setTestimonial(data);
-    });
-    return () => {};
-  }, []);
+  const current = testimonials && testimonials.length > 0 ? testimonials[currentIndex] : null;
+
+  if (!current && (!brands || brands.length === 0)) return null;
 
   return (
-    <>
-    {testimonials.length && (
-      <>
-      {console.log(testimonials)}
-        <div className="app__testimonial-item app__flex">
-          <img src={urlFor(testimonials[currentIndex].imgurl)} alt={testimonials[currentIndex].name} />
-          <div className="app__testimonial-content">
-            <p className="p-text">{testimonials[currentIndex].feedback}</p>
-            <div>
-              <h4 className="bold-text">{testimonials[currentIndex].name}</h4>
-              <h5 className="p-text">{testimonials[currentIndex].company}</h5>
+    <Section
+      id="testimonials"
+      index="04"
+      eyebrow="Testimonials"
+      title={
+        <>
+          Client <em>feedback</em> & trust.
+        </>
+      }
+      intro="What clients and collaborators say about working together."
+    >
+      {current && (
+        <div className="testimonial__container">
+          <div className="testimonial__card">
+            {current.image && (
+              <div className="testimonial__avatar-wrapper">
+                <img
+                  src={current.image}
+                  alt={current.name}
+                  className="testimonial__avatar"
+                />
+              </div>
+            )}
+            <div className="testimonial__content">
+              <blockquote className="testimonial__quote">
+                &ldquo;{current.feedback}&rdquo;
+              </blockquote>
+              <div className="testimonial__author">
+                <cite className="testimonial__author-name">{current.name}</cite>
+                <span className="testimonial__author-company">{current.company}</span>
+              </div>
             </div>
           </div>
+
+          {testimonials.length > 1 && (
+            <div className="testimonial__controls">
+              <button
+                type="button"
+                className="testimonial__ctrl-btn"
+                onClick={() =>
+                  handleClick(currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1)
+                }
+                aria-label="Previous testimonial"
+              >
+                <HiChevronLeft aria-hidden="true" />
+              </button>
+              <span className="mono-label testimonial__page-indicator">
+                {currentIndex + 1} / {testimonials.length}
+              </span>
+              <button
+                type="button"
+                className="testimonial__ctrl-btn"
+                onClick={() =>
+                  handleClick(currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1)
+                }
+                aria-label="Next testimonial"
+              >
+                <HiChevronRight aria-hidden="true" />
+              </button>
+            </div>
+          )}
         </div>
+      )}
 
-        <div className="app__testimonial-btns app__flex">
-          <div className="app__flex" onClick={() => handleClick(currentIndex === 0 ? testimonials.length - 1 : currentIndex - 1)}>
-            <HiChevronLeft />
-          </div>
-
-          <div className="app__flex" onClick={() => handleClick(currentIndex === testimonials.length - 1 ? 0 : currentIndex + 1)}>
-            <HiChevronRight />
-          </div>
+      {brands && brands.length > 0 && (
+        <div className="testimonial__brands">
+          {brands.map((brand) => (
+            <div key={brand.id || brand.name} className="testimonial__brand-item">
+              <img
+                src={brand.image}
+                alt={brand.name}
+                className="testimonial__brand-img"
+              />
+            </div>
+          ))}
         </div>
-      </>
-    )}
+      )}
+    </Section>
+  );
+};
 
-    <div className="app__testimonial-brands app__flex">
-      {brands.map((brand) => (
-        <motion.div
-          whileInView={{ opacity: [0, 1] }}
-          transition={{ duration: 0.5, type: 'tween' }}
-          key={brand._id}
-        >
-          <img src={urlFor(brand.imgUrl)} alt={brand.name} />
-        </motion.div>
-      ))}
-    </div>
-  </>
-  )
-}
-
-export default AppWrap(MotionWrap(Testimonial, "app__testimonial"), "testimonials", "app__primarybg");
+export default Testimonial;

@@ -1,0 +1,29 @@
+// Breakpoints (mobile-first). Chosen from the layouts that actually change:
+//  sm  – large phones: two-column chips / form rows
+//  md  – tablets: desktop nav appears, split layouts begin
+//  lg  – laptops: full hero + project split layouts
+//  xl  – wide screens: larger type and container
+$breakpoints: (
+  sm: 560px,
+  md: 900px,
+  lg: 1200px,
+  xl: 1600px,
+);
+
+@mixin up($name) {
+  @media (min-width: map-get($breakpoints, $name)) {
+    @content;
+  }
+}
+
+@mixin down($name) {
+  @media (max-width: (map-get($breakpoints, $name) - 0.02px)) {
+    @content;
+  }
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

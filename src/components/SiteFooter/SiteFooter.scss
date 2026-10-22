@@ -1,0 +1,29 @@
+@use "../../styles/breakpoints" as *;
+
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-6);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  text-align: center;
+
+  @include up(md) {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.site-footer__copy {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.site-footer__top {
+  font-size: var(--text-sm);
+}

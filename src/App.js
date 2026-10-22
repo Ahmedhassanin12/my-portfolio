@@ -1,20 +1,26 @@
 import React from "react";
-import "./App.scss";
 
-import { ABOUT, Header, Footer, Skills, Testimonial, Work } from "./container";
-import Navbar from "./components/Navbar/Navbar";
+import { Navbar, SiteFooter } from "./components";
+import { features } from "./constants";
+import { About, Contact, Hero, Skills, Testimonial, Work } from "./container";
 
 function App() {
   return (
-    <div className="app">
+    <>
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
       <Navbar />
-      <Header />
-      <ABOUT />
-      <Work />
-      <Skills />
-      <Testimonial />
-      <Footer />
-    </div>
+      <main id="main">
+        <Hero />
+        <About />
+        <Work />
+        <Skills />
+        {features.showTestimonials && <Testimonial />}
+        <Contact />
+      </main>
+      <SiteFooter />
+    </>
   );
 }
 
