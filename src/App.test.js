@@ -33,4 +33,7 @@ test("renders all local portfolio sections and new skills", () => {
   expect(screen.getByText(/Startup Defenders/i)).toBeInTheDocument();
   expect(screen.getByText(/Real-Time Chat Application/i)).toBeInTheDocument();
   expect(screen.getByText(/Quran-player/i)).toBeInTheDocument();
+
+  // Verify CV download links exist
+  expect(screen.getAllByText(/Download CV/i).length).toBeGreaterThanOrEqual(1);
 });
