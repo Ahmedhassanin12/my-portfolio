@@ -7,24 +7,28 @@
 .social-links__link {
   display: grid;
   place-items: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 50%;
-  border: 1px solid var(--color-border-strong);
+  width: 2.375rem;
+  height: 2.375rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface-1);
   color: var(--color-text-secondary);
   transition:
-    color var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out),
-    background-color var(--duration-base) var(--ease-out);
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
 
   svg {
-    width: 1.05rem;
-    height: 1.05rem;
+    width: 0.95rem;
+    height: 0.95rem;
   }
 
   &:hover {
-    color: var(--color-accent-ink);
-    background: var(--color-accent);
+    color: #FFFFFF;
+    background-color: var(--color-accent);
     border-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 0 10px var(--color-accent-glow);
   }
 }

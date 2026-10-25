@@ -7,34 +7,33 @@
 }
 
 .section__header {
-  max-width: 48rem;
-  margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+  max-width: 50rem;
+  margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 4rem);
 }
 
 .section__eyebrow {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
   color: var(--color-accent);
-
-  &::after {
-    content: "";
-    width: 3rem;
-    height: 1px;
-    background: currentColor;
-    opacity: 0.5;
-  }
 }
 
 .section__index {
   color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.05em;
 }
 
 .section__title {
   font-size: var(--text-2xl);
+  font-weight: 700;
   line-height: var(--leading-tight);
   letter-spacing: -0.035em;
+  color: var(--color-text);
+  word-break: break-word;
+  overflow-wrap: break-word;
 
   em {
     font-style: normal;
@@ -43,8 +42,9 @@
 }
 
 .section__intro {
-  margin-top: var(--space-5);
-  max-width: 38rem;
+  margin-top: var(--space-4);
+  max-width: 40rem;
   font-size: var(--text-md);
   color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
 }

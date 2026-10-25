@@ -23,11 +23,21 @@ const Reveal = ({ as: Tag = "div", delay = 0, className = "", style, children, .
           observer.disconnect();
         }
       },
-      { rootMargin: "0px 0px -10% 0px", threshold: 0.05 }
+      { rootMargin: "0px 0px -5% 0px", threshold: 0.01 }
     );
 
     observer.observe(node);
-    return () => observer.disconnect();
+
+    // Failsafe: reveal if not triggered after 1200ms so nothing stays hidden
+    const timer = setTimeout(() => {
+      setVisible(true);
+      observer.disconnect();
+    }, 1200);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
   }, []);
 
   return (

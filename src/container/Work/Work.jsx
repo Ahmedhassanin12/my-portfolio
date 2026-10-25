@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { AiFillEye, AiFillGithub } from "react-icons/ai";
+import { AiFillGithub } from "react-icons/ai";
 import { HiOutlineCode, HiOutlineExternalLink } from "react-icons/hi";
 import { Reveal, Section } from "../../components";
 import { projectsData } from "../../data/portfolioData";
@@ -34,12 +34,12 @@ const Work = () => {
       eyebrow="Selected Projects"
       title={
         <>
-          Crafted with <em>purpose</em> & code.
+          Production work & <em>interactive systems</em>.
         </>
       }
-      intro="A collection of web applications, client interfaces, and frontend engineering experiments."
+      intro="A collection of web applications, client interfaces, and frontend engineering systems built with modern web technologies."
     >
-      {/* Category Filter Tabs */}
+      {/* Category Filter Pills */}
       <div className="work__filters" role="tablist" aria-label="Filter projects by category">
         {categories.map((category) => (
           <button
@@ -55,72 +55,59 @@ const Work = () => {
         ))}
       </div>
 
+      {/* Projects Grid with Featured Editorial Treatment */}
       <div className="work__grid">
         {filteredWorks.map((work, index) => {
           const tags = (work.tags || []).filter((t) => t && t.trim() !== "" && t !== "All");
+          const isFeatured = activeFilter === "All" && index === 0;
 
           return (
             <Reveal
               as="article"
               key={work.id || work.title}
-              className="work__card"
-              delay={index * 80}
+              className={`work__card ${isFeatured ? "work__card--featured" : ""}`}
+              delay={index * 70}
             >
               <div className="work__media">
-                {work.isArchitecturePreview || !work.image ? (
-                  <div className="work__placeholder" aria-label="Architecture Preview">
-                    <div className="work__placeholder-code">
-                      <span className="work__placeholder-dot" />
-                      <span className="work__placeholder-dot" />
-                      <span className="work__placeholder-dot" />
-                    </div>
-                    <div className="work__placeholder-inner">
+                <div className="work__window-header" aria-hidden="true">
+                  <div className="work__window-dots">
+                    <span className="work__window-dot" />
+                    <span className="work__window-dot" />
+                    <span className="work__window-dot" />
+                  </div>
+                  <span className="work__window-slug mono-label" aria-hidden="true">
+                    app.preview/0{index + 1}
+                  </span>
+                  {isFeatured && (
+                    <span className="work__featured-badge mono-label">
+                      Featured Project
+                    </span>
+                  )}
+                </div>
+
+                <div className="work__preview-area">
+                  {work.isArchitecturePreview || !work.image ? (
+                    <div className="work__placeholder" aria-label="Architecture Preview">
                       <HiOutlineCode className="work__placeholder-icon" aria-hidden="true" />
                       <p className="work__placeholder-title">{work.title}</p>
                       <span className="work__placeholder-badge mono-label">
                         Architecture Preview
                       </span>
                     </div>
-                  </div>
-                ) : (
-                  <img
-                    src={work.image}
-                    alt={`Screenshot of ${work.title}`}
-                    loading={index < 2 ? "eager" : "lazy"}
-                    decoding="async"
-                    className="work__img"
-                  />
-                )}
-
-                {/* Quick-action overlay for desktop hover */}
-                <div className="work__overlay" aria-hidden="true">
-                  {work.projectLink && (
-                    <a
-                      href={work.projectLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="work__overlay-btn"
-                      tabIndex={-1}
-                    >
-                      <AiFillEye />
-                    </a>
-                  )}
-                  {work.codeLink && (
-                    <a
-                      href={work.codeLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="work__overlay-btn"
-                      tabIndex={-1}
-                    >
-                      <AiFillGithub />
-                    </a>
+                  ) : (
+                    <img
+                      src={work.image}
+                      alt={`Screenshot of ${work.title}`}
+                      loading={index < 2 ? "eager" : "lazy"}
+                      decoding="async"
+                      className="work__img"
+                    />
                   )}
                 </div>
               </div>
 
               <div className="work__content">
-                <div className="work__tags">
+                <div className="work__tags" aria-label="Project technologies">
                   {tags.map((tag) => (
                     <span key={tag} className="chip">
                       {tag}

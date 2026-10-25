@@ -1,13 +1,13 @@
 // Local portfolio content and asset imports.
 // Replaces external Sanity CMS dependency with zero-latency bundled local hosting.
 
-import complexUiImg from "../assets/about/complex-ui.svg";
-import reactNextImg from "../assets/about/react-next.svg";
-import designSystemsImg from "../assets/about/design-systems.svg";
+import complexUiImg from "../assets/about/complex-ui.png";
+import reactNextImg from "../assets/about/react-nextjs.png";
+import designSystemsImg from "../assets/about/design-systems.png";
 
 import chatAppImg from "../assets/projects/chat-app.png";
-import quranPlayerImg from "../assets/projects/quran-player.svg";
-import xciteStoreImg from "../assets/projects/xcite-store.svg";
+import quranPlayerImg from "../assets/projects/quran-player.png";
+import xciteStoreImg from "../assets/projects/xcite-store.png";
 import musicPlayerImg from "../assets/projects/music-player.png";
 import recipeAppImg from "../assets/projects/recipe-app.png";
 
@@ -52,17 +52,6 @@ export const aboutData = [
 
 export const projectsData = [
   {
-    id: "work-chat-app",
-    title: "Real-Time Chat Application",
-    description:
-      "Real-time communication platform with user authentication, live messaging channels, and direct messaging built using Firebase services and responsive SASS architecture.",
-    tags: ["React",  "Web App"],
-    image: chatAppImg,
-    projectLink: "https://ahmedchat-app.netlify.app/",
-    codeLink: "https://github.com/Ahmedhassanin12/Chat-App",
-    isArchitecturePreview: false,
-  },
-  {
     id: "work-quran-player",
     title: "Quran-player",
     description:
@@ -73,6 +62,18 @@ export const projectsData = [
     codeLink: "https://github.com/Ahmedhassanin12/Quran-player",
     isArchitecturePreview: false,
   },
+  {
+    id: "work-chat-app",
+    title: "Real-Time Chat Application",
+    description:
+      "Real-time communication platform with user authentication, live messaging channels, and direct messaging built using Firebase services and responsive SASS architecture.",
+    tags: ["React",  "Web App"],
+    image: chatAppImg,
+    projectLink: "https://ahmedchat-app.netlify.app/",
+    codeLink: "https://github.com/Ahmedhassanin12/Chat-App",
+    isArchitecturePreview: false,
+  },
+  
   {
     id: "work-xcite-store",
     title: "X-cite Clone (E-Commerce)",
@@ -172,18 +173,6 @@ export const experiencesData = [
   {
     year: "2022",
     works: [
-      {
-        id: "freelance",
-        name: "Frontend Developer",
-        company: "Self-Employed / Freelance",
-        location: "Remote",
-        period: "07/2022 – 09/2022",
-        desc: "Developed responsive e-commerce web applications and resolved 300+ production issues.",
-        highlights: [
-          "Built and maintained frontend codebases for 5+ e-commerce websites using React and vanilla JavaScript.",
-          "Led bug triage and resolution across production sites, identifying and fixing 300+ issues to improve stability and UX.",
-        ],
-      },
       {
         id: "iti-internship",
         name: "Frontend Developer (Internship)",

@@ -6,12 +6,12 @@
   gap: clamp(2.5rem, 1.5rem + 3vw, 4rem);
 
   @include up(lg) {
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
     align-items: start;
   }
 }
 
-/* Contact Info Cards ------------------------------------------------------ */
+/* Contact Info Cards */
 .contact__cards {
   display: flex;
   flex-direction: column;
@@ -27,24 +27,23 @@
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   transition:
-    transform var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out);
+    transform var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
 
   &:hover {
     transform: translateY(-2px);
-    border-color: var(--color-border-strong);
-    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-hover);
+    background-color: var(--color-surface-2);
   }
 
   &--cv {
     border-color: var(--color-border-strong);
-    background: linear-gradient(135deg, var(--color-surface-1), var(--color-surface-2));
 
     .contact__card-icon {
       background-color: var(--color-accent-soft);
       border-color: var(--color-accent);
-      color: var(--color-accent-strong);
+      color: var(--color-accent);
     }
 
     .contact__card-value {
@@ -61,8 +60,8 @@
 .contact__card-icon {
   display: grid;
   place-items: center;
-  width: 3rem;
-  height: 3rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 50%;
   background-color: var(--color-surface-2);
   border: 1px solid var(--color-border);
@@ -70,8 +69,8 @@
   flex-shrink: 0;
 
   svg {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }
 
@@ -89,12 +88,12 @@
   word-break: break-all;
 }
 
-/* Contact Form ------------------------------------------------------------ */
+/* Contact Form */
 .contact__form-wrapper {
   background-color: var(--color-surface-1);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  padding: clamp(1.5rem, 1rem + 2vw, 3rem);
+  padding: clamp(1.5rem, 1rem + 2vw, 2.75rem);
 }
 
 .contact__form {
@@ -110,18 +109,20 @@
 }
 
 .contact__label {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
+  color: var(--color-text-secondary);
 }
 
 .contact__input,
 .contact__textarea {
   width: 100%;
-  padding: 0.9rem 1.1rem;
-  background-color: var(--color-surface-2);
+  padding: 0.85rem 1rem;
+  background-color: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   color: var(--color-text);
   font-size: var(--text-sm);
+  font-family: var(--font-base);
   transition:
     border-color var(--duration-fast) var(--ease-out),
     box-shadow var(--duration-fast) var(--ease-out);
@@ -133,18 +134,13 @@
   &:focus {
     outline: none;
     border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px var(--color-accent-soft);
+    box-shadow: 0 0 0 2px var(--color-accent-soft);
   }
 }
 
 .contact__textarea {
   resize: vertical;
-  min-height: 140px;
-}
-
-.contact__error {
-  font-size: var(--text-xs);
-  color: var(--color-danger);
+  min-height: 130px;
 }
 
 .contact__submit-btn {
@@ -152,7 +148,7 @@
   margin-top: var(--space-2);
 }
 
-/* Success View ------------------------------------------------------------ */
+/* Success View */
 .contact__success {
   display: flex;
   flex-direction: column;
@@ -162,8 +158,8 @@
 }
 
 .contact__success-icon {
-  width: 4rem;
-  height: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
   color: var(--color-success);
   margin-bottom: var(--space-3);
 

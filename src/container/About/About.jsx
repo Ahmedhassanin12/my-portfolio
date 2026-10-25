@@ -12,7 +12,7 @@ const About = () => {
       eyebrow="About Me"
       title={
         <>
-          Good development means <em>good business</em>.
+          Engineering principles for <em>scalable products</em>.
         </>
       }
       intro="I specialize in creating clean, responsive, and performance-focused digital experiences with modern web technologies."
@@ -23,9 +23,17 @@ const About = () => {
             as="article"
             key={about.id || about.title}
             className="about__card"
-            delay={index * 100}
+            delay={index * 90}
           >
             <div className="about__media">
+              <div className="about__media-topbar" aria-hidden="true">
+                <span className="about__dot" />
+                <span className="about__dot" />
+                <span className="about__dot" />
+                <span className="about__media-tag mono-label">
+                  MODULE 0{index + 1}
+                </span>
+              </div>
               <img
                 src={about.image}
                 alt={about.title}
@@ -37,7 +45,10 @@ const About = () => {
               />
             </div>
             <div className="about__body">
-              <h3 className="about__card-title">{about.title}</h3>
+              <div className="about__header-row">
+                <span className="about__num mono-label">0{index + 1}</span>
+                <h3 className="about__card-title">{about.title}</h3>
+              </div>
               <p className="about__card-desc">{about.description}</p>
             </div>
           </Reveal>

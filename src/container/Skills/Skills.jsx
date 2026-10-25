@@ -13,27 +13,37 @@ const Skills = () => {
       eyebrow="Skills & Experience"
       title={
         <>
-          Technologies & <em>career journey</em>.
+          Technical stack & <em>career background</em>.
         </>
       }
-      intro="A comprehensive overview of the modern frontend toolkit I utilize and my professional background."
+      intro="A comprehensive overview of the modern frontend technologies I engineer with daily, alongside my professional industry track record."
     >
       <div className="skills__layout">
         {/* Left Column: Skills Grid */}
         <div className="skills__section">
-          <h3 className="skills__column-title mono-label">Technical Toolkit</h3>
+          <div className="skills__section-header">
+            <h3 className="skills__column-title mono-label">Technical Toolkit</h3>
+            <span className="skills__count-badge mono-label">
+              {skillsData.length} Tools
+            </span>
+          </div>
 
           <div className="skills__grid">
             {skillsData.map((skill, index) => (
               <Reveal
                 key={skill.name}
                 className="skills__item"
-                delay={index * 40}
+                delay={index * 35}
               >
                 <div className="skills__icon-wrapper">
                   <TechIcon name={skill.name} className="skills__icon" />
                 </div>
-                <span className="skills__name">{skill.name}</span>
+                <div className="skills__item-info">
+                  <span className="skills__name">{skill.name}</span>
+                  {skill.category && (
+                    <span className="skills__category mono-label">{skill.category}</span>
+                  )}
+                </div>
               </Reveal>
             ))}
           </div>
@@ -41,7 +51,12 @@ const Skills = () => {
 
         {/* Right Column: Experience Timeline */}
         <div className="skills__section">
-          <h3 className="skills__column-title mono-label">Work Experience</h3>
+          <div className="skills__section-header">
+            <h3 className="skills__column-title mono-label">Work Experience</h3>
+            <span className="skills__count-badge mono-label">
+              3+ Years Production
+            </span>
+          </div>
 
           <div className="skills__timeline">
             {experiencesData.map((exp, expIdx) => (
@@ -55,7 +70,7 @@ const Skills = () => {
                     <Reveal
                       key={work.id || work.name + workIdx}
                       className="skills__exp-card"
-                      delay={workIdx * 100}
+                      delay={workIdx * 80}
                     >
                       <div className="skills__exp-header">
                         <div className="skills__exp-title-row">

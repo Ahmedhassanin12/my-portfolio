@@ -2,38 +2,24 @@
 
 .hero {
   position: relative;
-  padding-top: calc(var(--nav-height) + clamp(2rem, 1rem + 4vw, 4.5rem));
-  padding-bottom: clamp(3.5rem, 2rem + 5vw, 6rem);
-  overflow: hidden;
-
-  // One soft accent glow anchored behind the portrait — gives the cut-out
-  // photo something to sit on without a busy background.
-  &::before {
-    content: "";
-    position: absolute;
-    top: -10%;
-    right: -15%;
-    width: min(70vw, 900px);
-    aspect-ratio: 1;
-    background: radial-gradient(circle, rgba(149, 156, 255, 0.16), transparent 62%);
-    pointer-events: none;
-  }
+  padding-top: calc(var(--nav-height) + clamp(2rem, 1.5rem + 3vw, 4.5rem));
+  padding-bottom: clamp(3.5rem, 2rem + 4vw, 6rem);
+  background: var(--color-bg);
 
   @include up(lg) {
-    min-height: min(100svh, 940px);
+    min-height: min(100svh, 920px);
     display: flex;
     align-items: center;
   }
 }
 
 .hero__inner {
-  position: relative;
   display: grid;
-  gap: clamp(3rem, 2rem + 4vw, 5rem);
+  gap: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
   align-items: center;
 
-  @include up(md) {
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  @include up(lg) {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
   }
 }
 
@@ -43,45 +29,67 @@
   align-items: flex-start;
 }
 
-.hero__eyebrow {
+/* Status Badge Pill */
+.hero__status-badge {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  margin-bottom: var(--space-5);
-  color: var(--color-text-secondary);
-
-  &::before {
-    content: "";
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background: var(--color-accent);
-    box-shadow: 0 0 0 4px var(--color-accent-soft);
-  }
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  margin-bottom: var(--space-4);
+  max-width: 100%;
 }
 
+.hero__status-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent);
+  flex-shrink: 0;
+}
+
+.hero__status-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+/* Hero Typography */
 .hero__title {
   font-size: var(--text-hero);
   font-weight: 700;
-  line-height: 0.98;
-  letter-spacing: -0.045em;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .hero__name {
+  color: var(--color-text);
+  border-bottom: 2px solid var(--color-accent);
+}
+
+.hero__dot {
   color: var(--color-accent);
 }
 
-.hero__title-dot {
-  color: var(--color-text);
-}
-
 .hero__lead {
-  margin-top: var(--space-5);
-  max-width: 34rem;
+  margin-top: var(--space-4);
+  max-width: 36rem;
   font-size: var(--text-md);
   color: var(--color-text-secondary);
+  line-height: var(--leading-normal);
 }
 
+/* Action Buttons */
 .hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -89,20 +97,22 @@
   margin-top: var(--space-6);
 }
 
+/* Stack and Social Meta Row */
 .hero__meta {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-5);
   width: 100%;
-  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  margin-top: clamp(2.5rem, 1.5rem + 2.5vw, 3.5rem);
   padding-top: var(--space-5);
   border-top: 1px solid var(--color-border);
 }
 
 .hero__stack {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-2);
 }
 
@@ -112,31 +122,87 @@
   gap: var(--space-2);
 }
 
-/* Portrait --------------------------------------------------------------- */
+.hero__social-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Showcase Card (Product-First framing for Portrait) */
 .hero__visual {
   display: flex;
   justify-content: center;
 
-  @include up(md) {
+  @include up(lg) {
     justify-content: flex-end;
   }
 }
 
-.hero__frame {
+.hero__showcase-card {
   position: relative;
-  width: min(100%, 22rem);
-  aspect-ratio: 4 / 5;
-  border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
-  border: 1px solid var(--color-border-strong);
-  background:
-    radial-gradient(120% 80% at 50% 100%, rgba(149, 156, 255, 0.55), transparent 70%),
-    linear-gradient(180deg, var(--color-surface-2), var(--color-surface-1));
+  width: min(100%, 23rem);
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-lg);
+  transition:
+    border-color var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out);
+
+  &:hover {
+    border-color: var(--color-border-hover);
+    transform: translateY(-2px);
+  }
 
   @include up(lg) {
-    width: min(100%, 26rem);
+    width: min(100%, 25rem);
   }
+}
+
+.hero__card-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  background-color: var(--color-surface-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero__card-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero__card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-border-strong);
+
+  &:first-child {
+    background-color: #ef4444;
+  }
+  &:nth-child(2) {
+    background-color: #f59e0b;
+  }
+  &:nth-child(3) {
+    background-color: #10b981;
+  }
+}
+
+.hero__card-label {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+}
+
+.hero__portrait-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 4.8;
+  background: linear-gradient(180deg, var(--color-surface-2) 0%, var(--color-surface-1) 100%);
+  overflow: hidden;
 }
 
 .hero__portrait {
@@ -148,5 +214,37 @@
   object-fit: cover;
   object-position: center bottom;
   display: block;
-  pointer-events: none;
+}
+
+.hero__card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 0.85rem 1.15rem;
+  background-color: var(--color-surface-2);
+  border-top: 1px solid var(--color-border);
+}
+
+.hero__badge-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.hero__badge-bullet {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+}
+
+.hero__badge-title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.hero__badge-sub {
+  font-size: 0.6875rem;
+  color: var(--color-text-muted);
 }
