@@ -79,7 +79,7 @@ export const projectsData = [
     title: "X-cite Clone (E-Commerce)",
     description:
       "Full-featured e-commerce frontend integrated with Firebase. Features product catalog browsing, search, persistent shopping cart, favorites via localStorage, and dynamic UI interactions.",
-    tags: ["React", "Redux", "Firebase", "E-Commerce"],
+    tags: ["React", "Redux",],
     image: xciteStoreImg,
     projectLink: "https://droobas.github.io/X-Cite-User/",
     codeLink: "https://github.com/Ahmedhassanin12/X-Cite-User",
@@ -101,7 +101,7 @@ export const projectsData = [
     title: "Recipe Cooking Assistant",
     description:
       "Interactive recipe discovery platform featuring dynamic ingredient and serving size recalculation, custom recipe bookmarking, and local storage persistence.",
-    tags: ["JavaScript", "REST API", "SASS"],
+    tags: ["JavaScript", "REST API"],
     image: recipeAppImg,
     projectLink: "https://recipe-ahmedibrahim.netlify.app/",
     codeLink: "https://github.com/Ahmedhassanin12/recipe-app",
