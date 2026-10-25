@@ -101,7 +101,7 @@ export const projectsData = [
     title: "Recipe Cooking Assistant",
     description:
       "Interactive recipe discovery platform featuring dynamic ingredient and serving size recalculation, custom recipe bookmarking, and local storage persistence.",
-    tags: ["JavaScript", "REST API"],
+    tags: ["JavaScript",],
     image: recipeAppImg,
     projectLink: "https://recipe-ahmedibrahim.netlify.app/",
     codeLink: "https://github.com/Ahmedhassanin12/recipe-app",
