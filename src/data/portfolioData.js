@@ -8,7 +8,6 @@ import designSystemsImg from "../assets/about/design-systems.png";
 import chatAppImg from "../assets/projects/chat-app.png";
 import quranPlayerImg from "../assets/projects/quran-player.png";
 import xciteStoreImg from "../assets/projects/xcite-store.png";
-import musicPlayerImg from "../assets/projects/music-player.png";
 import recipeAppImg from "../assets/projects/recipe-app.png";
 
 export const profileData = {
@@ -73,7 +72,6 @@ export const projectsData = [
     codeLink: "https://github.com/Ahmedhassanin12/Chat-App",
     isArchitecturePreview: false,
   },
-  
   {
     id: "work-xcite-store",
     title: "X-cite Clone (E-Commerce)",
@@ -83,17 +81,6 @@ export const projectsData = [
     image: xciteStoreImg,
     projectLink: "https://droobas.github.io/X-Cite-User/",
     codeLink: "https://github.com/Ahmedhassanin12/X-Cite-User",
-    isArchitecturePreview: false,
-  },
-  {
-    id: "work-music-player",
-    title: "LYRIKS Music Player",
-    description:
-      "High-performance music streaming application built with React and Redux Toolkit, featuring audio playback controls, lyric synchronization, and Shazam Core API discovery.",
-    tags: ["React", "Redux", "Web App"],
-    image: musicPlayerImg,
-    projectLink: "https://ahmed-lyriks.netlify.app/",
-    codeLink: "https://github.com/Ahmedhassanin12/music-player",
     isArchitecturePreview: false,
   },
   {
