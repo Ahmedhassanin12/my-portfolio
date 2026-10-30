@@ -53,9 +53,6 @@ export const projectsData = [
   {
     id: "work-quran-player",
     title: "Quran-player",
-    category: "AUDIO & STATE ARCHITECTURE",
-    stack: ["React", "Redux Toolkit", "Tailwind CSS", "REST API"],
-    previewSlug: "quranplayer.vercel.app",
     description:
       "Responsive Quran audio player with modern React architecture, asynchronous data fetching, and global state management via Redux Toolkit. Built with a clean Tailwind CSS UI.",
     tags: ["React", "Web App"],
@@ -67,12 +64,9 @@ export const projectsData = [
   {
     id: "work-chat-app",
     title: "Real-Time Chat Application",
-    category: "REAL-TIME MESSAGING SYSTEM",
-    stack: ["React", "Firebase", "SASS", "Auth & Channels"],
-    previewSlug: "ahmedchat-app.netlify.app",
     description:
       "Real-time communication platform with user authentication, live messaging channels, and direct messaging built using Firebase services and responsive SASS architecture.",
-    tags: ["React", "Web App"],
+    tags: ["React",  "Web App"],
     image: chatAppImg,
     projectLink: "https://ahmedchat-app.netlify.app/",
     codeLink: "https://github.com/Ahmedhassanin12/Chat-App",
@@ -81,12 +75,9 @@ export const projectsData = [
   {
     id: "work-xcite-store",
     title: "X-cite Clone (E-Commerce)",
-    category: "E-COMMERCE WEB PLATFORM",
-    stack: ["React", "Redux", "Firebase", "Persistent Cart"],
-    previewSlug: "droobas.github.io/X-Cite-User",
     description:
       "Full-featured e-commerce frontend integrated with Firebase. Features product catalog browsing, search, persistent shopping cart, favorites via localStorage, and dynamic UI interactions.",
-    tags: ["React", "Redux"],
+    tags: ["React", "Redux",],
     image: xciteStoreImg,
     projectLink: "https://droobas.github.io/X-Cite-User/",
     codeLink: "https://github.com/Ahmedhassanin12/X-Cite-User",
@@ -95,12 +86,9 @@ export const projectsData = [
   {
     id: "work-recipe-app",
     title: "Recipe Cooking Assistant",
-    category: "INTERACTIVE DISCOVERY UI",
-    stack: ["JavaScript (ES6+)", "MVC Architecture", "REST API", "LocalStorage"],
-    previewSlug: "recipe-ahmedibrahim.netlify.app",
     description:
       "Interactive recipe discovery platform featuring dynamic ingredient and serving size recalculation, custom recipe bookmarking, and local storage persistence.",
-    tags: ["JavaScript"],
+    tags: ["JavaScript",],
     image: recipeAppImg,
     projectLink: "https://recipe-ahmedibrahim.netlify.app/",
     codeLink: "https://github.com/Ahmedhassanin12/recipe-app",
