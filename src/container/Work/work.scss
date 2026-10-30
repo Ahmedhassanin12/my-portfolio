@@ -1,17 +1,66 @@
 @use "../../styles/breakpoints" as *;
 
-.work__filters {
+/* ==========================================================================
+   Work Section — Full-Viewport Scroll-Driven Layered Showcase
+   Inspired by the sticky curtain & 3-column editorial reference video while
+   preserving the Spline dark identity (#050505, #111111, #262626, #0B5CFF).
+   ========================================================================== */
+
+.work-section {
+  padding-bottom: var(--space-section);
+
+  @include up(md) {
+    padding-bottom: 0;
+  }
+}
+
+.work__header-wrap {
+  margin-bottom: var(--space-6);
+
+  @include up(md) {
+    margin-bottom: var(--space-7);
+  }
+}
+
+.work__header {
+  margin-bottom: var(--space-5);
+}
+
+.work__toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.work__toolbar-meta {
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+}
+
+.work__filters {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  align-items: center;
   gap: var(--space-2);
-  margin-bottom: var(--space-6);
   padding: 0.35rem;
   background-color: var(--color-bg-secondary);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-pill);
   width: fit-content;
   max-width: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include up(sm) {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
 }
 
 .work__filter-btn {
@@ -42,57 +91,241 @@
   }
 }
 
-.work__grid {
-  display: grid;
-  grid-template-columns: 1fr;
+/* ==========================================================================
+   Showcase Track & Scroll Sentinels
+   ========================================================================== */
+.work__showcase {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-6);
+  padding-inline: var(--gutter);
+  max-width: calc(var(--container-max) + var(--gutter) * 2);
+  margin-inline: auto;
 
   @include up(md) {
-    grid-template-columns: repeat(2, 1fr);
+    display: block;
+    padding-inline: 0;
+    max-width: none;
+    padding-bottom: 14vh;
   }
 }
 
-.work__card {
+.work__scroll-anchor {
+  display: none;
+
+  @include up(md) {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 118vh;
+    margin-bottom: -118vh;
+    pointer-events: none;
+    visibility: hidden;
+
+    &--last {
+      height: 114vh;
+      margin-bottom: -114vh;
+    }
+  }
+}
+
+/* ==========================================================================
+   Project Stage — Mobile Editorial Card (<900px) / Sticky Curtain Stage (>=900px)
+   ========================================================================== */
+.work__stage {
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: var(--color-surface-1);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition:
-    transform var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out);
 
-  &:hover {
-    transform: translateY(-3px);
-    border-color: var(--color-border-hover);
-    box-shadow: var(--shadow-lg);
+  @include up(md) {
+    position: sticky;
+    top: 0;
+    z-index: var(--stage-index, 1);
+    width: 100%;
+    height: 100vh;
+    min-height: 40rem;
+    margin-bottom: 18vh;
+    border-radius: 0;
+    border: 0;
+    border-top: 1px solid var(--color-border-strong);
+    background:
+      radial-gradient(
+        circle at 65% 42%,
+        rgba(11, 92, 255, 0.11) 0%,
+        rgba(11, 92, 255, 0.03) 38%,
+        transparent 70%
+      ),
+      linear-gradient(180deg, #08090d 0%, #050505 100%);
+    box-shadow: 0 -28px 70px rgba(0, 0, 0, 0.92);
+    justify-content: space-between;
+
+    /* Razor-sharp electric-blue specular highlight along the rising curtain edge */
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      z-index: 6;
+      background: linear-gradient(
+        90deg,
+        transparent 5%,
+        rgba(11, 92, 255, 0.65) 35%,
+        rgba(255, 255, 255, 0.45) 50%,
+        rgba(11, 92, 255, 0.65) 65%,
+        transparent 95%
+      );
+      pointer-events: none;
+    }
+
+    &--last {
+      margin-bottom: 0;
+    }
   }
 
-  /* Featured Project Editorial Treatment */
-  &--featured {
-    @include up(lg) {
-      grid-column: 1 / -1;
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-      align-items: stretch;
-
-      .work__media {
-        border-bottom: 0;
-        border-right: 1px solid var(--color-border);
-        aspect-ratio: auto;
-        min-height: 24rem;
-      }
-
-      .work__content {
-        padding: clamp(2rem, 1.5rem + 2vw, 3rem);
-      }
-
-      .work__title {
-        font-size: var(--text-2xl);
-      }
+  @include reduced-motion {
+    @include up(md) {
+      position: relative;
+      height: auto;
+      min-height: 44rem;
+      margin-bottom: 0;
     }
+  }
+}
+
+/* ==========================================================================
+   Top Stage HUD (Desktop Sticky Header Bar)
+   ========================================================================== */
+.work__stage-hud {
+  display: none;
+
+  @include up(md) {
+    display: block;
+    position: relative;
+    z-index: 4;
+    padding-top: calc(var(--nav-height) + var(--space-4));
+  }
+}
+
+.work__stage-hud-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.work__hud-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: rgba(10, 10, 12, 0.78);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(12px);
+}
+
+.work__hud-eyebrow {
+  color: var(--color-accent);
+  font-size: 0.6875rem;
+}
+
+.work__hud-divider {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-border-strong);
+}
+
+.work__hud-counter {
+  color: var(--color-text);
+  font-size: 0.6875rem;
+}
+
+.work__hud-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem;
+  border-radius: var(--radius-pill);
+  background: rgba(10, 10, 12, 0.78);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(12px);
+}
+
+.work__hud-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.35rem;
+  height: 1.75rem;
+  padding: 0 0.6rem;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  overflow: hidden;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+
+  &:hover {
+    color: var(--color-text);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &.is-current {
+    color: var(--color-text);
+    background-color: var(--color-surface-2);
+    border: 1px solid var(--color-border-strong);
+    font-weight: 600;
+  }
+}
+
+.work__hud-pill-num {
+  position: relative;
+  z-index: 2;
+}
+
+.work__hud-pill-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  transform-origin: left center;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Center/Right Framed Product Visual Stage
+   ========================================================================== */
+.work__stage-visual-wrap {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+
+  @include up(md) {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: calc(var(--nav-height) + 1.5rem);
+    padding-bottom: 1.5rem;
+    padding-left: clamp(10rem, 20vw, 22rem);
+    padding-right: var(--gutter);
+    pointer-events: none;
   }
 }
 
@@ -105,21 +338,33 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  @include up(md) {
+    width: min(100%, 64rem);
+    height: min(74vh, 41rem);
+    aspect-ratio: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      0 32px 80px -16px rgba(0, 0, 0, 0.92),
+      0 0 0 1px rgba(11, 92, 255, 0.14);
+  }
 }
 
 .work__window-header {
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  padding: 0.6rem 0.9rem;
-  background-color: var(--color-surface-2);
-  border-bottom: 1px solid var(--color-border-subtle);
+  padding: 0.65rem 1rem;
+  background-color: #121318;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
 }
 
 .work__window-dots {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .work__window-dot {
@@ -141,17 +386,17 @@
 
 .work__window-slug {
   font-size: 0.6875rem;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
 }
 
 .work__featured-badge {
   margin-left: auto;
   font-size: 0.65rem;
   color: var(--color-accent);
-  padding: 0.15rem 0.5rem;
+  padding: 0.15rem 0.55rem;
   border-radius: var(--radius-pill);
   background-color: var(--color-accent-soft);
-  border: 1px solid var(--color-accent);
+  border: 1px solid rgba(11, 92, 255, 0.45);
 }
 
 .work__preview-area {
@@ -159,25 +404,20 @@
   flex: 1;
   min-height: 0;
   width: 100%;
-  background-color: #080808;
+  background-color: #08080a;
   overflow: hidden;
 }
 
 .work__img {
   position: absolute;
-  inset: 0;
+  inset: -4% 0;
   width: 100%;
-  height: 100%;
+  height: 108%;
   object-fit: cover;
   object-position: top center;
-  transition: transform var(--duration-slow) var(--ease-out);
-
-  .work__card:hover & {
-    transform: scale(1.02);
-  }
+  will-change: transform;
 }
 
-/* Neutral Placeholder for projects without genuine screenshots */
 .work__placeholder {
   position: absolute;
   inset: 0;
@@ -209,35 +449,161 @@
   color: var(--color-text-muted);
 }
 
-/* Content Area */
-.work__content {
+/* ==========================================================================
+   Atmospheric Contrast Scrim (Desktop)
+   Keeps the upper/center project visual 100% vivid and crisp while providing
+   targeted contrast behind the left title and lower horizontal editorial band.
+   ========================================================================== */
+.work__stage-scrim {
+  display: none;
+
+  @include up(md) {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      /* Left column title contrast protection */
+      linear-gradient(
+        90deg,
+        #050505 0%,
+        rgba(5, 5, 5, 0.88) 18%,
+        rgba(5, 5, 5, 0.14) 36%,
+        rgba(5, 5, 5, 0) 65%
+      ),
+      /* Lower-middle editorial reading band — upper 52% is completely clear */
+      linear-gradient(
+        180deg,
+        rgba(5, 5, 5, 0) 0%,
+        rgba(5, 5, 5, 0) 48%,
+        rgba(5, 5, 5, 0.56) 66%,
+        rgba(5, 5, 5, 0.84) 84%,
+        #050505 100%
+      );
+  }
+}
+
+/* ==========================================================================
+   3-Column Horizontal Editorial Overlay
+   Matches the reference video's Left (Title) / Center (Discipline) / Right (Bio)
+   composition while providing direct Live Demo & Source actions.
+   ========================================================================== */
+.work__editorial-band {
+  position: relative;
+  z-index: 3;
+  padding: var(--space-5);
+
+  @include up(md) {
+    padding: 0;
+    margin-top: auto;
+    margin-bottom: clamp(5.5rem, 12vh, 8.5rem);
+  }
+}
+
+.work__editorial-grid {
   display: flex;
   flex-direction: column;
-  padding: var(--space-5);
-  flex: 1;
+  gap: var(--space-4);
+
+  @include up(md) {
+    display: grid;
+    grid-template-columns: minmax(14rem, 1.05fr) minmax(13rem, 0.95fr) minmax(19rem, 1.3fr);
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 3.5rem);
+  }
+}
+
+.work__col {
+  display: flex;
+  flex-direction: column;
+
+  &--title {
+    gap: var(--space-2);
+  }
+
+  &--meta {
+    gap: var(--space-3);
+
+    @include up(md) {
+      padding: var(--space-4) var(--space-5);
+      border-radius: var(--radius-md);
+      background: rgba(8, 9, 13, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      width: fit-content;
+    }
+  }
+
+  &--details {
+    gap: var(--space-4);
+
+    @include up(md) {
+      padding: var(--space-5);
+      border-radius: var(--radius-md);
+      background: rgba(8, 9, 13, 0.84);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.8);
+    }
+  }
+}
+
+.work__index-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-accent);
+  font-size: 0.7rem;
+}
+
+.work__index-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+.work__title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+
+  @include up(md) {
+    font-size: clamp(1.85rem, 1.35rem + 1.9vw, 2.85rem);
+    max-width: 12ch;
+  }
+}
+
+.work__discipline {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text);
 }
 
 .work__tags {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-2);
-  margin-bottom: var(--space-3);
 }
 
-.work__title {
-  font-size: var(--text-xl);
-  font-weight: 700;
-  margin-bottom: var(--space-2);
-  color: var(--color-text);
-  letter-spacing: -0.025em;
+.work__chip {
+  background: rgba(17, 17, 20, 0.85);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-secondary);
 }
 
 .work__desc {
   font-size: var(--text-sm);
-  color: var(--color-text-secondary);
-  line-height: var(--leading-normal);
-  margin-bottom: var(--space-5);
-  flex: 1;
+  color: #e5e7eb;
+  line-height: 1.65;
+  max-width: 42ch;
 }
 
 .work__actions {
@@ -245,13 +611,46 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
-  margin-top: auto;
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .work__action-btn {
-  min-height: 2.375rem;
+  min-height: 2.5rem;
   padding: 0 var(--space-4);
   font-size: var(--text-xs);
+}
+
+/* ==========================================================================
+   Bottom Stage Scroll Cue & Curtain Shade Overlay
+   ========================================================================== */
+.work__stage-footer {
+  display: none;
+
+  @include up(md) {
+    display: block;
+    position: relative;
+    z-index: 3;
+    padding-bottom: var(--space-4);
+  }
+}
+
+.work__stage-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.work__scroll-hint {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+}
+
+.work__stage-curtain-shade {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background-color: #020203;
+  pointer-events: none;
 }
